@@ -5,20 +5,16 @@ import java.util.Scanner;
 
 public class Banque {
 
-
     private static boolean isActive = true;
-
 
     private static int choix = 1;
 
     public static void main(String[] args) {
 
-
         menu();
         while (isActive) {
 
             int n = userInputint();
-
 
             if (n != 6) {
 
@@ -67,7 +63,6 @@ public class Banque {
                 isActive = false;
             }
 
-
         }
 
 
@@ -111,6 +106,7 @@ public class Banque {
         System.out.println("|| 4-afficher un  programmer        ||");
         System.out.println("|| 5-modifier le salaire            ||");
         System.out.println("|| 6-Quitter le programme           ||");
+        System.out.println("|| 7-voir mon conseiller            ||");
         System.out.println("|| 9-Afficher le Menu Principale    ||");
         System.out.println("||                                  ||");
         System.out.println("||==================================||");

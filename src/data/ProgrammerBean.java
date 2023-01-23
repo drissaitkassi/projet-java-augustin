@@ -89,11 +89,13 @@ public class ProgrammerBean {
     private String prime;
 
 
-    public ProgrammerBean(String nom, String preNom, String adresse, String pseudo, String hobby, String annissance, String salaire, String prime) {
+    public ProgrammerBean(String nom, String preNom, String adresse, String pseudo,String responsable, String hobby, String annissance, String salaire, String prime) {
+
         this.nom = nom;
         this.preNom = preNom;
         this.adresse = adresse;
         this.pseudo = pseudo;
+        this.responsable=responsable;
         this.hobby = hobby;
         this.annissance = annissance;
         this.salaire = salaire;

@@ -1,9 +1,6 @@
 package data;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public interface ActionBDD {
@@ -12,24 +9,25 @@ public interface ActionBDD {
 
     // DataBase Methods
 
-    Connection getConnection();
-    PreparedStatement getPreparedStatment(String ps);
-    Statement getStatement();
-    ResultSet getResultSet(String ps);
-
+    Connection getConnection() throws SQLException;
 
     // CRUD Methods
 
-    ArrayList<ProgrammerBean> getProgrammerBeanList();
-    ProgrammerBean getProgrammer(int id);
-    void addProgrammer(ProgrammerBean programmer);
-    void updateProgrammerSalary(int id,float newSalary);
-    void deleteProgrammer(int id );
+    ArrayList<ProgrammerBean> getProgrammerBeanList() throws SQLException;
+    ProgrammerBean getProgrammer(int id) throws SQLException;
+
+
+    String getMaxId() throws SQLException;
+
+    int addProgrammer() throws SQLException;
+
+    int updateProgrammerSalary(int id, float newSalary) throws SQLException;
+    int deleteProgrammer(int id ) throws SQLException;
 
     // Application Features
-    boolean verifier(int id);
-    void showProgrammer(int id);
-    void showAllProgrammers();
+    boolean verifier(int id) throws SQLException;
+    void showProgrammer(int id) throws SQLException;
+    void showAllProgrammers() throws SQLException;
 
 
 

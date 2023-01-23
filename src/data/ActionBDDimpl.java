@@ -4,82 +4,205 @@ import utils.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActionBDDimpl implements ActionBDD {
 
 
+    //*************** GLOBAL OBJECTS *****************
+    Constants constants = new Constants();
+
+    //*************** DATABASE METHODS *****************
+
     @Override
-    public Connection getConnection() {
-        Constants constants =new Constants();
-        Connection connection;
+    public Connection getConnection() throws SQLException {
+        Constants constants = new Constants();
+        Connection connection = null;
 
         try {
-             connection = DriverManager.getConnection(constants.getDB_URL(),
+            connection = DriverManager.getConnection(constants.getDB_URL(),
                     constants.getDB_USERNAME(),
                     constants.getDB_PASSWORD());
             System.out.println("connection succeded");
-            return connection;
 
 
         } catch (SQLException e) {
             System.out.println("connection failed");
             throw new RuntimeException(e);
         }
-        
-    }
-
-    @Override
-    public PreparedStatement getPreparedStatment(String ps) {
-        return null;
-    }
-
-    @Override
-    public Statement getStatement() {
-        return null;
-    }
-
-    @Override
-    public ResultSet getResultSet(String ps) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ProgrammerBean> getProgrammerBeanList() {
-        return null;
-    }
-
-    @Override
-    public ProgrammerBean getProgrammer(int id) {
-        return null;
-    }
-
-    @Override
-    public void addProgrammer(ProgrammerBean programmer) {
+        return connection;
 
     }
 
+
+    //*************** CRUD METHODS *****************
     @Override
-    public void updateProgrammerSalary(int id, float newSalary) {
+    public ArrayList<ProgrammerBean> getProgrammerBeanList() throws SQLException {
+
+        Connection con = getConnection();
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(constants.getGET_ALL_PROGRAMMERS_QUERY());
+
+        ArrayList<ProgrammerBean> beanArrayList = new ArrayList<>();
+        while (resultSet.next()) {
+
+            ProgrammerBean programmerBean = new ProgrammerBean();
+
+            programmerBean.setNom(resultSet.getString("nom"));
+            programmerBean.setPreNom(resultSet.getString("prenom"));
+            programmerBean.setAdresse(resultSet.getString("adresse"));
+            programmerBean.setPseudo(resultSet.getString("pseudo"));
+            programmerBean.setResponsable(resultSet.getString("responsable"));
+            programmerBean.setHobby(resultSet.getString("hobby"));
+            programmerBean.setAnnissance(resultSet.getString("annaissance"));
+            programmerBean.setSalaire(resultSet.getString("salaire"));
+            programmerBean.setPrime(resultSet.getString("prime"));
+            beanArrayList.add(programmerBean);
+
+
+        }
+        con.close();
+        return beanArrayList;
+    }
+    @Override
+    public ProgrammerBean getProgrammer(int id) throws SQLException {
+        Connection conn = getConnection();
+        Statement statement1 = conn.createStatement();
+        ResultSet resultSet1 = statement1.executeQuery(constants.getGET_A_PROGRAMMER_QUERY() + id);
+        ProgrammerBean programmerBean = new ProgrammerBean();
+        while (resultSet1.next()) {
+
+
+            programmerBean.setNom(resultSet1.getString("nom"));
+            programmerBean.setPreNom(resultSet1.getString("prenom"));
+            programmerBean.setAdresse(resultSet1.getString("adresse"));
+            programmerBean.setPseudo(resultSet1.getString("pseudo"));
+            programmerBean.setResponsable(resultSet1.getString("responsable"));
+            programmerBean.setHobby(resultSet1.getString("hobby"));
+            programmerBean.setAnnissance(resultSet1.getString("annaissance"));
+            programmerBean.setSalaire(resultSet1.getString("salaire"));
+            programmerBean.setPrime(resultSet1.getString("prime"));
+        }
+        conn.close();
+        return programmerBean;
+    }
+    @Override
+    public String getMaxId() throws SQLException {
+        Connection conn=getConnection();
+        Statement statement = conn.createStatement();
+        ResultSet res=statement.executeQuery(constants.getMAX_ID());
+        String maxId=null;
+        while (res.next()){
+            maxId=res.getString("id");
+        }
+        conn.close();
+        return maxId;
+    }
+    @Override
+    public int addProgrammer() throws SQLException {
+
+        Connection conn=getConnection();
+        int maxId=Integer.parseInt(getMaxId());
+        if(maxId>100) throw new IllegalArgumentException("vous avez atteint votre limit d ajout");
+
+        PreparedStatement preparedStatement = conn.prepareStatement(constants.getADD_PROGRAMMER_QUERY());
+        ProgrammerBean akdriss=new ProgrammerBean("ait kassi","driss","ain borja casa","akd","nobody","music","1991","2400","26");
+        preparedStatement.setString(1,akdriss.getNom());
+        preparedStatement.setString(2,akdriss.getPreNom());
+        preparedStatement.setString(3,akdriss.getAdresse());
+        preparedStatement.setString(4,akdriss.getPseudo());
+        preparedStatement.setString(5,akdriss.getResponsable());
+        preparedStatement.setString(6,akdriss.getHobby());
+        preparedStatement.setString(7,akdriss.getAnnissance());
+        preparedStatement.setString(8,akdriss.getSalaire());
+        preparedStatement.setString(9,akdriss.getPrime());
+
+        System.out.println("=====================");
+        System.out.println("nom : " + akdriss.getNom());
+        System.out.println("prenom : " + akdriss.getPreNom());
+        System.out.println("adresse : " + akdriss.getAdresse());
+        System.out.println("psuedo : " + akdriss.getPseudo());
+        System.out.println("responsable : " + akdriss.getResponsable());
+        System.out.println("hobby : " + akdriss.getHobby());
+        System.out.println("annissance : " + akdriss.getAnnissance());
+        System.out.println("salaire : " + akdriss.getSalaire());
+        System.out.println("prime : " + akdriss.getPrime());
+
+        int row =preparedStatement.executeUpdate();
+
+        if(row>0) System.out.println("Ajoute Reussi");
+        conn.close();
+
+       return row;
 
     }
-
     @Override
-    public void deleteProgrammer(int id) {
+    public int updateProgrammerSalary(int id, float newSalary) throws SQLException {
+        //open connection
+        Connection conn=getConnection();
+        PreparedStatement preparedStatement = conn.prepareStatement(constants.getUPDATE_PROGRAMMER_QUERY()+id);
+            preparedStatement.setString(8, String.valueOf(newSalary));
+            int row = preparedStatement.executeUpdate();
+            //close connection
+            conn.close();
+            return row;
+    }
+    @Override
+    public int deleteProgrammer(int id) throws SQLException {
 
+        Connection conn = getConnection();
+
+        Statement statement =conn.createStatement();
+            int deleted =statement.executeUpdate(constants.getDELETE_PROGRAMMER_QUERY()+id);
+            if (deleted>0) System.out.println("deleted succesfuly");
+            else System.out.println("failed to delete check that you got the right id ");
+            System.out.println(deleted);
+            conn.close();
+        return deleted;
     }
 
+
+    //*************** APPLICATION FEATURES METHODS  *****************
     @Override
-    public boolean verifier(int id) {
+    public boolean verifier(int id) throws SQLException {
+        if (deleteProgrammer(id)>0)return true;
         return false;
     }
-
     @Override
-    public void showProgrammer(int id) {
+    public void showProgrammer(int id) throws SQLException {
+        ProgrammerBean programmer=getProgrammer(id);
+
+        System.out.println("=====================");
+        System.out.println("id : " + id);
+        System.out.println("nom : " + programmer.getNom());
+        System.out.println("prenom : " + programmer.getPreNom());
+        System.out.println("adresse : " + programmer.getAdresse());
+        System.out.println("psuedo : " + programmer.getPseudo());
+        System.out.println("responsable : " + programmer.getResponsable());
+        System.out.println("hobby : " + programmer.getHobby());
+        System.out.println("annissance : " + programmer.getAnnissance());
+        System.out.println("salaire : " + programmer.getSalaire());
+        System.out.println("prime : " + programmer.getPrime());
 
     }
-
     @Override
-    public void showAllProgrammers() {
+    public void showAllProgrammers() throws SQLException {
+
+        List<ProgrammerBean> programmers = getProgrammerBeanList();
+        programmers.forEach(programmer -> {
+            System.out.println("=====================");
+            System.out.println("id : " + programmer.getId());
+            System.out.println("nom : " + programmer.getNom());
+            System.out.println("prenom : " + programmer.getPreNom());
+            System.out.println("adresse : " + programmer.getAdresse());
+            System.out.println("psuedo : " + programmer.getPseudo());
+            System.out.println("responsable : " + programmer.getResponsable());
+            System.out.println("hobby : " + programmer.getHobby());
+            System.out.println("annissance : " + programmer.getAnnissance());
+            System.out.println("salaire : " + programmer.getSalaire());
+            System.out.println("prime : " + programmer.getPrime());
+
+        });
 
     }
 }

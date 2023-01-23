@@ -32,7 +32,7 @@ public class Start {
             Connection connection = DriverManager.getConnection(constants.getDB_URL(),
                     constants.getDB_USERNAME(),
                     constants.getDB_PASSWORD());
-           /* List<ProgrammerBean> programmerBeanList=new ArrayList<>();
+           List<ProgrammerBean> programmerBeanList=new ArrayList<>();
             Statement  statement=connection.createStatement();
             ResultSet resultSet=statement.executeQuery(GET_ALL_PROGRAMMERS_QUERY);
             while (resultSet.next()){
@@ -50,10 +50,12 @@ public class Start {
 
                 programmerBeanList.add(programmerBean);
 
-            }*/
+            }
             // print all programers
             //programmerBeanList.forEach(programmerBean -> System.out.println(programmerBean));
             //****************** Get a Programmer ******************
+
+
 
 
          /*   Statement statement1=connection.createStatement();
