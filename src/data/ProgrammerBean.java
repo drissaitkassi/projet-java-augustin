@@ -59,6 +59,15 @@ public class ProgrammerBean {
     public void setPrime(String prime) {
         this.prime = prime;
     }
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     private String nom;
     private String preNom;

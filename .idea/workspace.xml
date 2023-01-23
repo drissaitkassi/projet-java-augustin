@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="df1cca25-79ab-4560-bb44-8fa46ba24fef" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-projet-akdriss.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java-projet-akdriss.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/ActionBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ActionBDD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/ProgrammerBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ProgrammerBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/exec/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exec/Start.java" afterDir="false" />
     </list>
@@ -68,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674465012860</updated>
-      <workItem from="1674465015973" duration="12809000" />
+      <workItem from="1674465015973" duration="16316000" />
     </task>
     <servers />
   </component>
