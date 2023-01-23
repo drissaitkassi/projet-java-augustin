@@ -11,14 +11,19 @@ public class Start {
 
 
     public static void main(String[] args) {
-        int input=7;
-        Constants constants =new Constants();
+        int input = 11;
+        Constants constants = new Constants();
         //Constants queries
         String GET_ALL_PROGRAMMERS_QUERY = "SELECT * FROM programmeur";
-        String GET_A_PROGRAMMER_QUERY = "SELECT * FROM programmeur where id ="+input;
-        String ADD_PROGRAMMER_QUERY = "INSERT INTO programmeur(id, name) VALUES( ?, ?)";
-        String UPDATE_PROGRAMMER_QUERY = "INSERT INTO persons(id, name) VALUES( ?, ?)";
-        String DELETE_PROGRAMMER_QUERY = "delete from programmeur where id ="+input;
+        String GET_A_PROGRAMMER_QUERY = "SELECT * FROM programmeur where id =" + input;
+        String ADD_PROGRAMMER_QUERY = "INSERT INTO PROGRAMMEUR(NOM,PRENOM,ADRESSE,PSEUDO,RESPONSABLE,HOBBY,ANNAISSANCE,SALAIRE,PRIME)" +
+                " VALUES(?,?,?,?,?,?,?,?,?)";
+
+        String UPDATE_PROGRAMMER_QUERY = "UPDATE programmeur SET nom = ?,prenom = ?,adresse= ?,\n" +
+                "pseudo = ?,responsable = ?,\n" +
+                "hobby = ?,annaissance = ?,\n" +
+                "salaire = ?,prime = ? WHERE id=" + input;
+        String DELETE_PROGRAMMER_QUERY = "delete from programmeur where id =" + input;
 
         try {
             //****************** GET ALL PROGRAMMERS ******************
@@ -71,16 +76,46 @@ public class Start {
             }*/
 
             //********* DELETE A PROGRAMMER ********
-            Statement statement =connection.createStatement();
+            /*Statement statement =connection.createStatement();
             int deleted =statement.executeUpdate(DELETE_PROGRAMMER_QUERY);
             if (deleted>0) System.out.println("deleted succesfuly");
             else System.out.println("failed to delete check that you got the right id ");
-            System.out.println(deleted);
+            System.out.println(deleted);*/
 
             //******** ADD PROGRAMMER ********
+/*            PreparedStatement preparedStatement = connection.prepareStatement(ADD_PROGRAMMER_QUERY);
+           // preparedStatement.setInt(1,11);
+            preparedStatement.setString(1,"ait kassi");
+            preparedStatement.setString(2,"driss");
+            preparedStatement.setString(3,"ain borja casablanca ");
+            preparedStatement.setString(4,"akd");
+            preparedStatement.setString(5,"nobody");
+            preparedStatement.setString(6,"Music");
+            preparedStatement.setString(7,"1991");
+            preparedStatement.setString(8,"2400");
+            preparedStatement.setString(9,"60");
 
-            INSERT INTO PROGRAMMEUR(NOM,PRENOM,ADRESSE,PSEUDO,RESPONSABLE,HOBBY,ANNAISSANCE,SALAIRE,PRIME) VALUES
-                    ('Torvalds','Linus','2 avenue Linux Git','linuxroot','Didier Achvar','Salsa','1969','2170','50'),
+            int row =preparedStatement.executeUpdate();
+
+            System.out.println(row);*/
+
+            //******** UPDATE PROGRAMMER ********
+       /*     PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PROGRAMMER_QUERY);
+
+            preparedStatement.setString(1, " 3kassi");
+            preparedStatement.setString(2, "3drissup");
+            preparedStatement.setString(3, "3agadir ");
+            preparedStatement.setString(4, "3upsudo");
+            preparedStatement.setString(5, "3nobody");
+            preparedStatement.setString(6, "3Music");
+            preparedStatement.setString(7, "3991");
+            preparedStatement.setString(8, "32400");
+            preparedStatement.setString(9, "360");
+
+
+            int row = preparedStatement.executeUpdate();
+
+            System.out.println(row);*/
 
 
             System.out.println("connection succeded");
