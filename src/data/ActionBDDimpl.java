@@ -96,35 +96,37 @@ public class ActionBDDimpl implements ActionBDD {
         conn.close();
         return maxId;
     }
+
+
+
     @Override
-    public int addProgrammer() throws SQLException {
+    public int addProgrammer(ProgrammerBean programmerBean) throws SQLException {
 
         Connection conn=getConnection();
         int maxId=Integer.parseInt(getMaxId());
-        if(maxId>100) throw new IllegalArgumentException("vous avez atteint votre limit d ajout");
+        if(maxId>100) throw new IllegalArgumentException("vous avez atteint votre limit d'ajout");
 
         PreparedStatement preparedStatement = conn.prepareStatement(constants.getADD_PROGRAMMER_QUERY());
-        ProgrammerBean akdriss=new ProgrammerBean("ait kassi","driss","ain borja casa","akd","nobody","music","1991","2400","26");
-        preparedStatement.setString(1,akdriss.getNom());
-        preparedStatement.setString(2,akdriss.getPreNom());
-        preparedStatement.setString(3,akdriss.getAdresse());
-        preparedStatement.setString(4,akdriss.getPseudo());
-        preparedStatement.setString(5,akdriss.getResponsable());
-        preparedStatement.setString(6,akdriss.getHobby());
-        preparedStatement.setString(7,akdriss.getAnnissance());
-        preparedStatement.setString(8,akdriss.getSalaire());
-        preparedStatement.setString(9,akdriss.getPrime());
+        preparedStatement.setString(1,programmerBean.getNom());
+        preparedStatement.setString(2,programmerBean.getPreNom());
+        preparedStatement.setString(3,programmerBean.getAdresse());
+        preparedStatement.setString(4,programmerBean.getPseudo());
+        preparedStatement.setString(5,programmerBean.getResponsable());
+        preparedStatement.setString(6,programmerBean.getHobby());
+        preparedStatement.setString(7,programmerBean.getAnnissance());
+        preparedStatement.setString(8,programmerBean.getSalaire());
+        preparedStatement.setString(9,programmerBean.getPrime());
 
         System.out.println("=====================");
-        System.out.println("nom : " + akdriss.getNom());
-        System.out.println("prenom : " + akdriss.getPreNom());
-        System.out.println("adresse : " + akdriss.getAdresse());
-        System.out.println("psuedo : " + akdriss.getPseudo());
-        System.out.println("responsable : " + akdriss.getResponsable());
-        System.out.println("hobby : " + akdriss.getHobby());
-        System.out.println("annissance : " + akdriss.getAnnissance());
-        System.out.println("salaire : " + akdriss.getSalaire());
-        System.out.println("prime : " + akdriss.getPrime());
+        System.out.println("nom : " + programmerBean.getNom());
+        System.out.println("prenom : " + programmerBean.getPreNom());
+        System.out.println("adresse : " + programmerBean.getAdresse());
+        System.out.println("psuedo : " + programmerBean.getPseudo());
+        System.out.println("responsable : " + programmerBean.getResponsable());
+        System.out.println("hobby : " + programmerBean.getHobby());
+        System.out.println("annissance : " + programmerBean.getAnnissance());
+        System.out.println("salaire : " + programmerBean.getSalaire());
+        System.out.println("prime : " + programmerBean.getPrime());
 
         int row =preparedStatement.executeUpdate();
 

@@ -1,6 +1,7 @@
 package exec;
 
 import data.ActionBDDimpl;
+import data.ProgrammerBean;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -51,7 +52,26 @@ public  class Menu extends AbsMenu {
                     }
                     case 5 -> {
                         System.out.println("vous avez choisi 5 ");
-                        actionBDDimpl.addProgrammer();
+                        System.out.println("Enter Nom : " );
+                        String nom =userInputstr();
+                        System.out.println("Enter Prenom : " );
+                        String preNom =userInputstr();
+                        System.out.println("Enter Adresse : " );
+                        String adresse =userInputstr();
+                        System.out.println("Entrer Psuedo : " );
+                        String psuedo =userInputstr();
+                        System.out.println("Entrer Responsable : ");
+                        String responsable =userInputstr();
+                        System.out.println("Entrer Hobby : " );
+                        String hobby =userInputstr();
+                        System.out.println("Entrer Annissance : ");
+                        String annaissance =userInputstr();
+                        System.out.println("Entrer Salaire : ");
+                        String  salaire =userInputstr();
+                        System.out.println("Entrer Prime : " );
+                        String prime =userInputstr();
+                        ProgrammerBean p=new ProgrammerBean(nom,preNom,adresse,psuedo,responsable,hobby,annaissance,salaire,prime);
+                        actionBDDimpl.addProgrammer(p);
                     }
                     case 7 -> {
                         System.out.println("vous avez choisi 7 ");
@@ -86,6 +106,10 @@ public  class Menu extends AbsMenu {
    public int userInputint() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+    public String  userInputstr() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
     public float userInputFloat() {
         Scanner scanner = new Scanner(System.in);

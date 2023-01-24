@@ -14,7 +14,9 @@ public interface ActionBDD {
 
     String getMaxId() throws SQLException;
 
-    int addProgrammer() throws SQLException;
+
+
+    int addProgrammer(ProgrammerBean programmerBean) throws SQLException;
 
     int updateProgrammerSalary(int id, float newSalary) throws SQLException;
     int deleteProgrammer(int id ) throws SQLException;
