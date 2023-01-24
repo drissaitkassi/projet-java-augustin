@@ -21,9 +21,6 @@ public class ActionBDDimpl implements ActionBDD {
             connection = DriverManager.getConnection(constants.getDB_URL(),
                     constants.getDB_USERNAME(),
                     constants.getDB_PASSWORD());
-            System.out.println("connection succeded");
-
-
         } catch (SQLException e) {
             System.out.println("connection failed");
             throw new RuntimeException(e);

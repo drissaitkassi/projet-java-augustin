@@ -14,10 +14,10 @@ public  class Menu extends AbsMenu {
 
         menu();
         while (isActive) {
-            List<Integer> allPossibleUserInputs=List.of(1,2,3,4,5,6,7,8,9);
+            List<Integer> allPossibleUserInputs=List.of(1,2,3,4,5,6,7,9);
             int n = userInputint();
             if(!allPossibleUserInputs.contains(n)){
-                System.out.println("merci de saisire un valid depuis le menu principale ");
+                System.out.println("merci de saisire un choix valid depuis le menu principale ");
                 System.out.println("quel est votre choix ");
                 n=userInputint();
             }

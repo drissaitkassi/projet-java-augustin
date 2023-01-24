@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df1cca25-79ab-4560-bb44-8fa46ba24fef" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/62b7685d-1b60-49c3-a3d9-795958ddf1dd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/62b7685d-1b60-49c3-a3d9-795958ddf1dd.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exec/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exec/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exec/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exec/Start.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,25 +42,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/minousatmac/IdeaProjects/projet-java-augustin&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/minousatmac/IdeaProjects/projet-java-augustin",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "database.query.execution"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="exec" />
@@ -71,7 +76,7 @@
       <updated>1674465012860</updated>
       <workItem from="1674465015973" duration="19984000" />
       <workItem from="1674497502750" duration="18279000" />
-      <workItem from="1674520457580" duration="2752000" />
+      <workItem from="1674520457580" duration="11101000" />
     </task>
     <servers />
   </component>

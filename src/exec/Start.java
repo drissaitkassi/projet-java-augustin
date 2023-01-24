@@ -7,6 +7,8 @@ public class Start {
         Menu menu = new Menu();
        menu.interfacePrincipale();
 
+        /*ExeptionGenerator e=new ExeptionGenerator();
+        e.generateAddException();*/
     }
 
 
