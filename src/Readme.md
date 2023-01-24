@@ -1,6 +1,3 @@
-test add methode based on count not max id 
-add programmer dynamicly
-verifier le cahier de charge
 
 ## Manuel d'Execution 
 
@@ -22,7 +19,6 @@ verifier le cahier de charge
     ├── exec
     │   ├── AbsMenu.java
     │   ├── Main.java
-    │   ├── Menu.java
     │   └── Start.java
     ├── exeptions
     │   ├── ExeptionGenerator.java

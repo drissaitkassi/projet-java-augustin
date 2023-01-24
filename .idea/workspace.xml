@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df1cca25-79ab-4560-bb44-8fa46ba24fef" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/437c7667-e130-456a-9525-7d3a44dbae1d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/437c7667-e130-456a-9525-7d3a44dbae1d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/437c7667-e130-456a-9525-7d3a44dbae1d/storage_v2/_src_/database/javaprojet.blX3Bg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/437c7667-e130-456a-9525-7d3a44dbae1d/storage_v2/_src_/database/javaprojet.blX3Bg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/ActionBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ActionBDD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ActionBDDimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/exec/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exec/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exec/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exec/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/exeptions/ExeptionGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exeptions/ExeptionGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Constants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +79,7 @@
       <workItem from="1674465015973" duration="19984000" />
       <workItem from="1674497502750" duration="18279000" />
       <workItem from="1674520457580" duration="11165000" />
-      <workItem from="1674595898021" duration="1480000" />
+      <workItem from="1674595898021" duration="4543000" />
     </task>
     <servers />
   </component>

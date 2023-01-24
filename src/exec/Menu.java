@@ -2,6 +2,7 @@ package exec;
 
 import data.ActionBDDimpl;
 import data.ProgrammerBean;
+import exeptions.NomberOfAddQueriesExceeded;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -71,7 +72,11 @@ public  class Menu extends AbsMenu {
                         System.out.println("Entrer Prime : " );
                         String prime =userInputstr();
                         ProgrammerBean p=new ProgrammerBean(nom,preNom,adresse,psuedo,responsable,hobby,annaissance,salaire,prime);
-                        actionBDDimpl.addProgrammer(p);
+                        try {
+                            actionBDDimpl.addProgrammer(p);
+                        } catch (NomberOfAddQueriesExceeded e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     case 7 -> {
                         System.out.println("vous avez choisi 7 ");

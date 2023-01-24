@@ -1,5 +1,6 @@
 package data;
 
+import exeptions.NomberOfAddQueriesExceeded;
 import utils.Constants;
 
 import java.sql.*;
@@ -85,13 +86,13 @@ public class ActionBDDimpl implements ActionBDD {
         return programmerBean;
     }
     @Override
-    public String getMaxId() throws SQLException {
+    public String getIdCount() throws SQLException {
         Connection conn=getConnection();
         Statement statement = conn.createStatement();
         ResultSet res=statement.executeQuery(constants.getMAX_ID());
         String maxId=null;
         while (res.next()){
-            maxId=res.getString("id");
+            maxId=res.getString("count");
         }
         conn.close();
         return maxId;
@@ -100,11 +101,12 @@ public class ActionBDDimpl implements ActionBDD {
 
 
     @Override
-    public int addProgrammer(ProgrammerBean programmerBean) throws SQLException {
+    public int addProgrammer(ProgrammerBean programmerBean) throws SQLException, NomberOfAddQueriesExceeded {
 
         Connection conn=getConnection();
-        int maxId=Integer.parseInt(getMaxId());
-        if(maxId>100) throw new IllegalArgumentException("vous avez atteint votre limit d'ajout");
+        int maxId=Integer.parseInt(getIdCount());
+        if(maxId==100) throw new NomberOfAddQueriesExceeded("=====LIMIT AJOUT :"+maxId+" ATTEINT======");
+
 
         PreparedStatement preparedStatement = conn.prepareStatement(constants.getADD_PROGRAMMER_QUERY());
         preparedStatement.setString(1,programmerBean.getNom());

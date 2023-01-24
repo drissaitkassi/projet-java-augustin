@@ -1,5 +1,7 @@
 package data;
 
+import exeptions.NomberOfAddQueriesExceeded;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,11 +14,11 @@ public interface ActionBDD {
     ArrayList<ProgrammerBean> getProgrammerBeanList() throws SQLException;
     ProgrammerBean getProgrammer(int id) throws SQLException;
 
-    String getMaxId() throws SQLException;
+    String getIdCount() throws SQLException;
 
 
 
-    int addProgrammer(ProgrammerBean programmerBean) throws SQLException;
+    int addProgrammer(ProgrammerBean programmerBean) throws SQLException, NomberOfAddQueriesExceeded;
 
     int updateProgrammerSalary(int id, float newSalary) throws SQLException;
     int deleteProgrammer(int id ) throws SQLException;

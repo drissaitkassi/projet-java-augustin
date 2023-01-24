@@ -11,7 +11,11 @@ public class ExeptionGenerator {
         ActionBDDimpl actionBDDimpl =new ActionBDDimpl();
         ProgrammerBean testProgramer=new ProgrammerBean("test","test","test","test","test","test","test","test","test");
         for (int i = 0; i <100 ; i++) {
-            actionBDDimpl.addProgrammer(testProgramer);
+            try {
+                actionBDDimpl.addProgrammer(testProgramer);
+            } catch (NomberOfAddQueriesExceeded e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
