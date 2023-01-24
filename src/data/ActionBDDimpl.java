@@ -13,7 +13,7 @@ public class ActionBDDimpl implements ActionBDD {
 
     //*************** DATABASE METHODS *****************
     @Override
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection()  {
         Constants constants = new Constants();
         Connection connection = null;
 
@@ -175,7 +175,7 @@ public class ActionBDDimpl implements ActionBDD {
         Statement statement =conn.createStatement();
             int deleted =statement.executeUpdate(constants.getDELETE_PROGRAMMER_QUERY()+id);
             if (deleted>0) System.out.println("deleted succesfuly");
-            else System.out.println("failed to delete check that you got the right id ");
+            else System.out.println("Suppression KO Enter Id a nouveau ");
             System.out.println(deleted);
             conn.close();
         return deleted;
