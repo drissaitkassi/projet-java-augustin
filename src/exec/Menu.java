@@ -1,9 +1,9 @@
 package exec;
 
 import data.ActionBDDimpl;
-import utils.Constants;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public  class Menu extends AbsMenu {
@@ -14,8 +14,13 @@ public  class Menu extends AbsMenu {
 
         menu();
         while (isActive) {
-
+            List<Integer> allPossibleUserInputs=List.of(1,2,3,4,5,6,7,8,9);
             int n = userInputint();
+            if(!allPossibleUserInputs.contains(n)){
+                System.out.println("merci de saisire un valid depuis le menu principale ");
+                System.out.println("quel est votre choix ");
+                n=userInputint();
+            }
 
             if (n != 6) {
 
@@ -34,25 +39,24 @@ public  class Menu extends AbsMenu {
                         System.out.println("vous avez choisi 3 ");
                         System.out.println("enter l'id du programmeur a supprimer:");
                         actionBDDimpl.deleteProgrammer(userInputint());
-                     /*   int idParam=userInputint();
-                        while (actionBDDimpl.deleteProgrammer(idParam)<1){
-                            idParam=userInputint();
-                            System.out.println("le id que vous avez saisie est KO");
-                            System.out.println("enterer nouveau id ");
-                        }*/
-
                     }
                     case 4 -> {
                         System.out.println("vous avez choisi 4 ");
-                        actionBDDimpl.updateProgrammerSalary(userInputint(),userInputFloat());
+                        System.out.println("enter l'id du programmeur a mettre a jour:");
+                        int idToUpdate=userInputint();
+                        System.out.println("enter le montant du nouveau salaire:");
+                        float newSalary=userInputFloat();
+                        actionBDDimpl.updateProgrammerSalary(idToUpdate,newSalary);
 
                     }
                     case 5 -> {
                         System.out.println("vous avez choisi 5 ");
+                        actionBDDimpl.addProgrammer();
+                    }
+                    case 7 -> {
+                        System.out.println("vous avez choisi 7 ");
                         monConseille();
                     }
-
-
                 }
             } else {
                 isActive = false;
@@ -71,7 +75,6 @@ public  class Menu extends AbsMenu {
                 System.out.println("||   au plaisir de vous     ||");
                 System.out.println("||        Revoir            ||");
                 System.out.println("||                          ||");
-                System.out.println("||                          ||");
                 System.out.println("||==========================||");
                 isActive = false;
             }
@@ -87,10 +90,6 @@ public  class Menu extends AbsMenu {
     public float userInputFloat() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextFloat();
-    }
-    public int userInputstr() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine().charAt(0);
     }
     @Override
     public void menu() {
@@ -114,12 +113,16 @@ public  class Menu extends AbsMenu {
         System.out.println("||==================================||");
         System.out.println("||   Menu Principale                ||");
         System.out.println("||                                  ||");
+        System.out.println("||                                  ||");
         System.out.println("|| 1-afficher tous les programmeurs ||");
         System.out.println("|| 2-afficher un  programmeur       ||");
         System.out.println("|| 3-suprimer un  programmeur       ||");
         System.out.println("|| 4-modifier le salaire            ||");
+        System.out.println("|| 5-ajouter un  programmmeur       ||");
         System.out.println("|| 6-Quitter le programme           ||");
+        System.out.println("|| 7-voir mon conseiller            ||");
         System.out.println("|| 9-Afficher le Menu Principale    ||");
+        System.out.println("||                                  ||");
         System.out.println("||                                  ||");
         System.out.println("||==================================||");
     }

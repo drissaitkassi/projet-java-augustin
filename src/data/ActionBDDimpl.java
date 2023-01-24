@@ -8,12 +8,10 @@ import java.util.List;
 
 public class ActionBDDimpl implements ActionBDD {
 
-
     //*************** GLOBAL OBJECTS *****************
     Constants constants = new Constants();
 
     //*************** DATABASE METHODS *****************
-
     @Override
     public Connection getConnection() throws SQLException {
         Constants constants = new Constants();
@@ -33,7 +31,6 @@ public class ActionBDDimpl implements ActionBDD {
         return connection;
 
     }
-
 
     //*************** CRUD METHODS *****************
     @Override
@@ -72,7 +69,7 @@ public class ActionBDDimpl implements ActionBDD {
         ProgrammerBean programmerBean = new ProgrammerBean();
         while (resultSet1.next()) {
 
-
+            programmerBean.setId(resultSet1.getInt("id"));
             programmerBean.setNom(resultSet1.getString("nom"));
             programmerBean.setPreNom(resultSet1.getString("prenom"));
             programmerBean.setAdresse(resultSet1.getString("adresse"));
@@ -84,6 +81,7 @@ public class ActionBDDimpl implements ActionBDD {
             programmerBean.setPrime(resultSet1.getString("prime"));
         }
         conn.close();
+
         return programmerBean;
     }
     @Override
@@ -141,8 +139,20 @@ public class ActionBDDimpl implements ActionBDD {
         //open connection
         Connection conn=getConnection();
         PreparedStatement preparedStatement = conn.prepareStatement(constants.getUPDATE_PROGRAMMER_QUERY()+id);
+            preparedStatement.setInt(1,id);
+            preparedStatement.setString(2,null);
+            preparedStatement.setString(3,null);
+            preparedStatement.setString(4,null);
+            preparedStatement.setString(5,null);
+            preparedStatement.setString(6,null);
+            preparedStatement.setString(7,null);
             preparedStatement.setString(8, String.valueOf(newSalary));
+            preparedStatement.setString(9,null);
+
+
             int row = preparedStatement.executeUpdate();
+            if (row>0) System.out.println("Modification succeded");
+            else System.out.println("merci de fournir un id valid entrer 0 et 99 ?:");
             //close connection
             conn.close();
             return row;
