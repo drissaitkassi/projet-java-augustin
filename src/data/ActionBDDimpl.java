@@ -44,7 +44,7 @@ public class ActionBDDimpl implements ActionBDD {
         while (resultSet.next()) {
 
             ProgrammerBean programmerBean = new ProgrammerBean();
-
+            programmerBean.setId(resultSet.getInt("id"));
             programmerBean.setNom(resultSet.getString("nom"));
             programmerBean.setPreNom(resultSet.getString("prenom"));
             programmerBean.setAdresse(resultSet.getString("adresse"));
@@ -80,8 +80,11 @@ public class ActionBDDimpl implements ActionBDD {
             programmerBean.setSalaire(resultSet1.getString("salaire"));
             programmerBean.setPrime(resultSet1.getString("prime"));
         }
-        conn.close();
 
+        conn.close();
+        if(programmerBean.getId()==0) {
+
+        return null;}
         return programmerBean;
     }
     @Override
@@ -138,24 +141,31 @@ public class ActionBDDimpl implements ActionBDD {
     public int updateProgrammerSalary(int id, float newSalary) throws SQLException {
         //open connection
         Connection conn=getConnection();
+        ProgrammerBean programmer=getProgrammer(id);
+        int rowAffected=0;
+        if (programmer!=null){
         PreparedStatement preparedStatement = conn.prepareStatement(constants.getUPDATE_PROGRAMMER_QUERY()+id);
-            preparedStatement.setInt(1,id);
-            preparedStatement.setString(2,null);
-            preparedStatement.setString(3,null);
-            preparedStatement.setString(4,null);
-            preparedStatement.setString(5,null);
-            preparedStatement.setString(6,null);
-            preparedStatement.setString(7,null);
+           // preparedStatement.setInt(1,programmer.getId());
+            preparedStatement.setString(1,programmer.getNom());
+            preparedStatement.setString(2,programmer.getPreNom());
+            preparedStatement.setString(3,programmer.getAdresse());
+            preparedStatement.setString(4,programmer.getPseudo());
+            preparedStatement.setString(5,programmer.getResponsable());
+            preparedStatement.setString(6,programmer.getHobby());
+            preparedStatement.setString(7,programmer.getAnnissance());
             preparedStatement.setString(8, String.valueOf(newSalary));
-            preparedStatement.setString(9,null);
+            preparedStatement.setString(9,programmer.getPrime());
 
 
             int row = preparedStatement.executeUpdate();
             if (row>0) System.out.println("Modification succeded");
-            else System.out.println("merci de fournir un id valid entrer 0 et 99 ?:");
             //close connection
             conn.close();
-            return row;
+            return rowAffected= row;
+        }
+            else System.out.println("Recherch KO saisir Id a nouveau");
+
+            return rowAffected;
     }
     @Override
     public int deleteProgrammer(int id) throws SQLException {
@@ -181,18 +191,21 @@ public class ActionBDDimpl implements ActionBDD {
     @Override
     public void showProgrammer(int id) throws SQLException {
         ProgrammerBean programmer=getProgrammer(id);
+        if (programmer!=null){
+            System.out.println("=====================");
+            System.out.println("id : " + programmer.getId());
+            System.out.println("nom : " + programmer.getNom());
+            System.out.println("prenom : " + programmer.getPreNom());
+            System.out.println("adresse : " + programmer.getAdresse());
+            System.out.println("psuedo : " + programmer.getPseudo());
+            System.out.println("responsable : " + programmer.getResponsable());
+            System.out.println("hobby : " + programmer.getHobby());
+            System.out.println("annissance : " + programmer.getAnnissance());
+            System.out.println("salaire : " + programmer.getSalaire());
+            System.out.println("prime : " + programmer.getPrime());
+        }else System.out.println("Recherch KO saisir Id a nouveau");
 
-        System.out.println("=====================");
-        System.out.println("id : " + id);
-        System.out.println("nom : " + programmer.getNom());
-        System.out.println("prenom : " + programmer.getPreNom());
-        System.out.println("adresse : " + programmer.getAdresse());
-        System.out.println("psuedo : " + programmer.getPseudo());
-        System.out.println("responsable : " + programmer.getResponsable());
-        System.out.println("hobby : " + programmer.getHobby());
-        System.out.println("annissance : " + programmer.getAnnissance());
-        System.out.println("salaire : " + programmer.getSalaire());
-        System.out.println("prime : " + programmer.getPrime());
+
 
     }
     @Override

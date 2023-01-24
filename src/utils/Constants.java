@@ -66,6 +66,7 @@ public class Constants {
 
     public void setDELETE_PROGRAMMER_QUERY(String DELETE_PROGRAMMER_QUERY) {
         this.DELETE_PROGRAMMER_QUERY = DELETE_PROGRAMMER_QUERY;
+        //lklk
     }
 
     private String DB_URL = "jdbc:postgresql://localhost:5432/javaprojet";
