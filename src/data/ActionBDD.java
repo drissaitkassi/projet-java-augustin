@@ -6,16 +6,11 @@ import java.util.ArrayList;
 public interface ActionBDD {
 
 
-
     // DataBase Methods
-
     Connection getConnection() throws SQLException;
-
     // CRUD Methods
-
     ArrayList<ProgrammerBean> getProgrammerBeanList() throws SQLException;
     ProgrammerBean getProgrammer(int id) throws SQLException;
-
 
     String getMaxId() throws SQLException;
 
