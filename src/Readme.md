@@ -31,7 +31,7 @@
 
 ## Base de Donnée 
 
-SGBD utilisé : PostgreSQL avec Pgadmin <br>
+SGBD utilisé : PostgreSQL avec Pgadmin <br>  
 Base de Donnée : javaprojet <br>
 Port : 5432
 

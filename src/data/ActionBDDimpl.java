@@ -9,34 +9,35 @@ import java.util.List;
 
 public class ActionBDDimpl implements ActionBDD {
 
-    //*************** GLOBAL OBJECTS *****************
-    Constants constants = new Constants();
-
     //*************** DATABASE METHODS *****************
+
     @Override
     public Connection getConnection()  {
-        Constants constants = new Constants();
+        Constants Constants = new Constants();
         Connection connection = null;
-
         try {
-            connection = DriverManager.getConnection(constants.getDB_URL(),
-                    constants.getDB_USERNAME(),
-                    constants.getDB_PASSWORD());
+            connection = DriverManager.getConnection(Constants.DB_URL,
+                    Constants.DB_USERNAME,
+                    Constants.DB_PASSWORD);
         } catch (SQLException e) {
             System.out.println("connection failed");
-            throw new RuntimeException(e);
+            
         }
         return connection;
 
     }
 
-    //*************** CRUD METHODS *****************
+    //******************* CRUD METHODS **********************
     @Override
     public ArrayList<ProgrammerBean> getProgrammerBeanList() throws SQLException {
 
         Connection con = getConnection();
         Statement statement = con.createStatement();
-        ResultSet resultSet = statement.executeQuery(constants.getGET_ALL_PROGRAMMERS_QUERY());
+        ResultSet resultSet = statement.executeQuery(Constants.GET_ALL_PROGRAMMERS_QUERY);
+     //todo plus de commentaire
+
+        // Definir Une list qu'on va populer par les Result set de notre requet
+        // et par la suit en va la retourner comme valeur de retour
 
         ArrayList<ProgrammerBean> beanArrayList = new ArrayList<>();
         while (resultSet.next()) {
@@ -52,18 +53,27 @@ public class ActionBDDimpl implements ActionBDD {
             programmerBean.setAnnissance(resultSet.getString("annaissance"));
             programmerBean.setSalaire(resultSet.getString("salaire"));
             programmerBean.setPrime(resultSet.getString("prime"));
+
+            // a chaque iteration on ajout l'objet programmer bean rempli par le result Set
+
             beanArrayList.add(programmerBean);
 
 
         }
         con.close();
+        statement.close();
+        resultSet.close();
+
         return beanArrayList;
     }
     @Override
     public ProgrammerBean getProgrammer(int id) throws SQLException {
         Connection conn = getConnection();
         Statement statement1 = conn.createStatement();
-        ResultSet resultSet1 = statement1.executeQuery(constants.getGET_A_PROGRAMMER_QUERY() + id);
+        ResultSet resultSet1 = statement1.executeQuery(Constants.GET_A_PROGRAMMER_QUERY + id);
+
+        // Definir Un objet qu'on va populer par les Result set de notre requet
+        // et par la suit en va la retourner comme valeur de retour
         ProgrammerBean programmerBean = new ProgrammerBean();
         while (resultSet1.next()) {
 
@@ -77,24 +87,31 @@ public class ActionBDDimpl implements ActionBDD {
             programmerBean.setAnnissance(resultSet1.getString("annaissance"));
             programmerBean.setSalaire(resultSet1.getString("salaire"));
             programmerBean.setPrime(resultSet1.getString("prime"));
+
+
         }
-
         conn.close();
-        if(programmerBean.getId()==0) {
+        statement1.close();
+        resultSet1.close();
 
-        return null;}
+
         return programmerBean;
     }
+
+    // cette method est pour tester combien de lignes dans notre table programmer
+    // pour limité l'ajout a 100 lignes
     @Override
     public String getIdCount() throws SQLException {
         Connection conn=getConnection();
         Statement statement = conn.createStatement();
-        ResultSet res=statement.executeQuery(constants.getMAX_ID());
+        ResultSet res=statement.executeQuery(Constants.MAX_ID);
         String maxId=null;
         while (res.next()){
             maxId=res.getString("count");
         }
         conn.close();
+        statement.close();
+        res.close();
         return maxId;
     }
 
@@ -104,11 +121,14 @@ public class ActionBDDimpl implements ActionBDD {
     public int addProgrammer(ProgrammerBean programmerBean) throws SQLException, NomberOfAddQueriesExceeded {
 
         Connection conn=getConnection();
+        //maxId récupere le nombre de lignes correcpondant a la column id  ce qui permet
+        //de savoir le nombre de ligne sur toute la table
         int maxId=Integer.parseInt(getIdCount());
+        // en fait un test pour voir si le nombre de ligne est > 100 pour interdir l'ajoute
         if(maxId==100) throw new NomberOfAddQueriesExceeded("=====LIMIT AJOUT :"+maxId+" ATTEINT======");
 
 
-        PreparedStatement preparedStatement = conn.prepareStatement(constants.getADD_PROGRAMMER_QUERY());
+        PreparedStatement preparedStatement = conn.prepareStatement(Constants.ADD_PROGRAMMER_QUERY);
         preparedStatement.setString(1,programmerBean.getNom());
         preparedStatement.setString(2,programmerBean.getPreNom());
         preparedStatement.setString(3,programmerBean.getAdresse());
@@ -119,34 +139,27 @@ public class ActionBDDimpl implements ActionBDD {
         preparedStatement.setString(8,programmerBean.getSalaire());
         preparedStatement.setString(9,programmerBean.getPrime());
 
-        System.out.println("=====================");
-        System.out.println("nom : " + programmerBean.getNom());
-        System.out.println("prenom : " + programmerBean.getPreNom());
-        System.out.println("adresse : " + programmerBean.getAdresse());
-        System.out.println("psuedo : " + programmerBean.getPseudo());
-        System.out.println("responsable : " + programmerBean.getResponsable());
-        System.out.println("hobby : " + programmerBean.getHobby());
-        System.out.println("annissance : " + programmerBean.getAnnissance());
-        System.out.println("salaire : " + programmerBean.getSalaire());
-        System.out.println("prime : " + programmerBean.getPrime());
+        // retourn le nombre de ligne affecter pour savir est ce que la requette est executer correctement
 
-        int row =preparedStatement.executeUpdate();
+        int rowAffected =preparedStatement.executeUpdate();
 
-        if(row>0) System.out.println("Ajoute Reussi");
+        if(rowAffected>0) System.out.println("Ajoute Reussi");
         conn.close();
+        preparedStatement.close();
 
-       return row;
+
+       return rowAffected;
 
     }
     @Override
     public int updateProgrammerSalary(int id, float newSalary) throws SQLException {
         //open connection
         Connection conn=getConnection();
+        //appeller la methode getProgramer pour recevior le programmer qu'on veut modifier
         ProgrammerBean programmer=getProgrammer(id);
         int rowAffected=0;
         if (programmer!=null){
-        PreparedStatement preparedStatement = conn.prepareStatement(constants.getUPDATE_PROGRAMMER_QUERY()+id);
-           // preparedStatement.setInt(1,programmer.getId());
+        PreparedStatement preparedStatement = conn.prepareStatement(Constants.UPDATE_PROGRAMMER_QUERY+id);
             preparedStatement.setString(1,programmer.getNom());
             preparedStatement.setString(2,programmer.getPreNom());
             preparedStatement.setString(3,programmer.getAdresse());
@@ -158,11 +171,13 @@ public class ActionBDDimpl implements ActionBDD {
             preparedStatement.setString(9,programmer.getPrime());
 
 
-            int row = preparedStatement.executeUpdate();
-            if (row>0) System.out.println("Modification succeded");
+            rowAffected = preparedStatement.executeUpdate();
+            if (rowAffected>0) System.out.println("Modification succeded");
             //close connection
             conn.close();
-            return rowAffected= row;
+            preparedStatement.close();
+
+            return rowAffected;
         }
             else System.out.println("Recherch KO saisir Id a nouveau");
 
@@ -174,23 +189,22 @@ public class ActionBDDimpl implements ActionBDD {
         Connection conn = getConnection();
 
         Statement statement =conn.createStatement();
-            int deleted =statement.executeUpdate(constants.getDELETE_PROGRAMMER_QUERY()+id);
+        // retourn le nombre de ligne affecter pour savir est ce que la requette est executer correctement
+            int deleted =statement.executeUpdate(Constants.DELETE_PROGRAMMER_QUERY+id);
             if (deleted>0) System.out.println("deleted succesfuly");
             else System.out.println("Suppression KO Enter Id a nouveau ");
-            System.out.println(deleted);
             conn.close();
+            statement.close();
+
         return deleted;
     }
 
 
     //*************** APPLICATION FEATURES METHODS  *****************
-    @Override
-    public boolean verifier(int id) throws SQLException {
-        if (deleteProgrammer(id)>0)return true;
-        return false;
-    }
+  
     @Override
     public void showProgrammer(int id) throws SQLException {
+        //appeller la methode getProgramer pour recevior le programmer qu'on veut afficher
         ProgrammerBean programmer=getProgrammer(id);
         if (programmer!=null){
             System.out.println("=====================");
@@ -211,6 +225,7 @@ public class ActionBDDimpl implements ActionBDD {
     }
     @Override
     public void showAllProgrammers() throws SQLException {
+        //appeller la methode getProgramerBeanList pour recevior les programmeur qu'on veut afficher
 
         List<ProgrammerBean> programmers = getProgrammerBeanList();
         programmers.forEach(programmer -> {

@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public  class Menu extends AbsMenu {
     ActionBDDimpl actionBDDimpl=new ActionBDDimpl();
-    private  boolean isActive = true;
+    private  boolean isActive ;
     private  int choix = 1;
     public void interfacePrincipale() throws SQLException {
 
-        menu();
+        afficherMenu();
         while (isActive) {
             List<Integer> allPossibleUserInputs=List.of(1,2,3,4,5,6,7,9);
             int n = userInputint();
@@ -27,7 +27,7 @@ public  class Menu extends AbsMenu {
             if (n != 6) {
 
                 switch (n) {
-                    case 9 -> menu();
+                    case 9 -> afficherMenu();
                     case 1 -> {
                         System.out.println("vous avez choisi 1 ");
                       actionBDDimpl.showAllProgrammers();
@@ -107,21 +107,24 @@ public  class Menu extends AbsMenu {
         }
     }
 
-
+    // scanner pour les valeurs  de type int
    public int userInputint() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+    // scanner pour les valeurs  de type string
     public String  userInputstr() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+    // scanner pour les valeurs  de type float
     public float userInputFloat() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextFloat();
     }
+
     @Override
-    public void menu() {
+    public void afficherMenu() {
         String banner = """
                                                                                                                                                                       \s
                 @@@@@@@   @@@  @@@@@@@@  @@@  @@@  @@@  @@@  @@@@@@@@  @@@  @@@  @@@  @@@      @@@@@@      @@@       @@@  @@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@@  @@@ \s
