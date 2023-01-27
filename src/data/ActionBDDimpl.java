@@ -1,6 +1,7 @@
 package data;
 
 import exeptions.NomberOfAddQueriesExceeded;
+import exeptions.ProgrammerNotFound;
 import utils.Constants;
 
 import java.sql.*;
@@ -67,7 +68,7 @@ public class ActionBDDimpl implements ActionBDD {
         return beanArrayList;
     }
     @Override
-    public ProgrammerBean getProgrammer(int id) throws SQLException {
+    public ProgrammerBean getProgrammer(int id) throws SQLException, ProgrammerNotFound {
         Connection conn = getConnection();
         Statement statement1 = conn.createStatement();
         ResultSet resultSet1 = statement1.executeQuery(Constants.GET_A_PROGRAMMER_QUERY + id);
@@ -90,6 +91,7 @@ public class ActionBDDimpl implements ActionBDD {
 
 
         }
+        if(programmerBean.getId()==0) throw new ProgrammerNotFound("Recherche KO Saisir a nouveau Id ");
         conn.close();
         statement1.close();
         resultSet1.close();
@@ -152,7 +154,7 @@ public class ActionBDDimpl implements ActionBDD {
 
     }
     @Override
-    public int updateProgrammerSalary(int id, float newSalary) throws SQLException {
+    public int updateProgrammerSalary(int id, float newSalary) throws SQLException, ProgrammerNotFound {
         //open connection
         Connection conn=getConnection();
         //appeller la methode getProgramer pour recevior le programmer qu'on veut modifier
@@ -203,23 +205,22 @@ public class ActionBDDimpl implements ActionBDD {
     //*************** APPLICATION FEATURES METHODS  *****************
   
     @Override
-    public void showProgrammer(int id) throws SQLException {
+    public void showProgrammer(int id) throws SQLException, ProgrammerNotFound {
         //appeller la methode getProgramer pour recevior le programmer qu'on veut afficher
         ProgrammerBean programmer=getProgrammer(id);
-        if (programmer!=null){
-            System.out.println("=====================");
-            System.out.println("id : " + programmer.getId());
-            System.out.println("nom : " + programmer.getNom());
-            System.out.println("prenom : " + programmer.getPreNom());
-            System.out.println("adresse : " + programmer.getAdresse());
-            System.out.println("psuedo : " + programmer.getPseudo());
-            System.out.println("responsable : " + programmer.getResponsable());
-            System.out.println("hobby : " + programmer.getHobby());
-            System.out.println("annissance : " + programmer.getAnnissance());
-            System.out.println("salaire : " + programmer.getSalaire());
-            System.out.println("prime : " + programmer.getPrime());
-        }else System.out.println("Recherch KO saisir Id a nouveau");
-
+        //todo to remove print progremmer
+        System.out.println(programmer);
+        System.out.println("=====================");
+        System.out.println("id : " + programmer.getId());
+        System.out.println("nom : " + programmer.getNom());
+        System.out.println("prenom : " + programmer.getPreNom());
+        System.out.println("adresse : " + programmer.getAdresse());
+        System.out.println("psuedo : " + programmer.getPseudo());
+        System.out.println("responsable : " + programmer.getResponsable());
+        System.out.println("hobby : " + programmer.getHobby());
+        System.out.println("annissance : " + programmer.getAnnissance());
+        System.out.println("salaire : " + programmer.getSalaire());
+        System.out.println("prime : " + programmer.getPrime());
 
 
     }

@@ -3,6 +3,7 @@ package exec;
 import data.ActionBDDimpl;
 import data.ProgrammerBean;
 import exeptions.NomberOfAddQueriesExceeded;
+import exeptions.ProgrammerNotFound;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.Scanner;
 
 public  class Menu extends AbsMenu {
     ActionBDDimpl actionBDDimpl=new ActionBDDimpl();
-    private  boolean isActive ;
+    private  boolean isActive=true ;
     private  int choix = 1;
-    public void interfacePrincipale() throws SQLException {
+    public void interfacePrincipale() throws SQLException, ProgrammerNotFound {
 
         afficherMenu();
         while (isActive) {
@@ -35,7 +36,12 @@ public  class Menu extends AbsMenu {
                     case 2 -> {
                         System.out.println("vous avez choisi 2 ");
                         System.out.println("enter l'id du programmeur a afficher:");
-                       actionBDDimpl.showProgrammer(userInputint());
+                        try {
+                            actionBDDimpl.showProgrammer(userInputint());
+                        }catch (ProgrammerNotFound e){
+                            System.out.println(e.getMessage());
+                        }
+
                     }
                     case 3 -> {
                         System.out.println("vous avez choisi 3 ");
@@ -48,7 +54,12 @@ public  class Menu extends AbsMenu {
                         int idToUpdate=userInputint();
                         System.out.println("enter le montant du nouveau salaire:");
                         float newSalary=userInputFloat();
-                        actionBDDimpl.updateProgrammerSalary(idToUpdate,newSalary);
+                        try {
+                            actionBDDimpl.updateProgrammerSalary(idToUpdate,newSalary);
+                        }catch (ProgrammerNotFound e){
+                            System.out.println(e.getMessage());
+                        }
+
 
                     }
                     case 5 -> {
